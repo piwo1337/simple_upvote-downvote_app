@@ -1,0 +1,30 @@
+<table class="table-hover">
+  <tbody>
+    <% @submissions.each do |submission| %>
+      <tr class="post">
+        <td>          
+        <span class="arrows">
+          <%= link_to like_submission_path(submission), method: :put do %>
+            <i class="fa fa-caret-up fa-lg " aria-hidden="true"></i>
+          <% end %> <br />
+            <%= submission.get_upvotes.size %> <br />
+            <%= link_to dislike_submission_path(submission), method: :put do %>
+              <i class="fa fa-caret-down fa-lg " aria-hidden="true"></i>
+            <% end %>
+            </span>
+        <div class="posts">
+          <%= link_to submission.title, submission.url, class: "title" %>
+          <%= link_to submission.url, "(#{submission.url})", target: "_blank" %>
+
+          <p>
+            <%= submission.user.email %> 
+            <%= time_ago_in_words(submission.created_at) %>ago | 
+            <%= link_to "#{submission.comments.count} comments", submission %> 
+          </p>
+          </div>
+          
+           </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
